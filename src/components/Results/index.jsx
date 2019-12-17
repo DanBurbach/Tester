@@ -22,13 +22,11 @@ const Results = ({ currentResultsArray }) => {
           <li key={messages.id} className="card">
             <h3>{messages.body}</h3>
             <p>
-              Name: {messages.user.name} | Species: {messages.species}
+              Username: {messages.user.username}
+              Name: {messages.user.name}
+              <br/>
+             <img src={messages.user.avatar_url} alt='user_image'/>
             </p>
-            <p>
-              Likes: {messages.likes.total} | Gender: {messages.gender}
-            </p>
-            <p>Origin: {messages.origin.name}</p>
-            <p>Location: {messages.location.name}</p>
           </li>
         );
       })}
@@ -38,7 +36,6 @@ const Results = ({ currentResultsArray }) => {
 
 Results.propTypes = {
   currentResultsArray: PropTypes.arrayOf(Object),
-
   name: PropTypes.string,
   dispatch: PropTypes.func
 };
