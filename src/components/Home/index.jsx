@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 
+import SymbolSearch from './../Search';
+import Results from '../Results';
+
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -35,6 +38,7 @@ class Home extends Component {
     return (
       <div>
         <div> Home </div>
+        <SymbolSearch/>
         <form>
           <label>
             $<input
@@ -50,6 +54,8 @@ class Home extends Component {
         </form>
         <br/>
         <div> {this.state.stock} </div>
+        <br/>
+        <Results/>
       </div>
     );
   }
