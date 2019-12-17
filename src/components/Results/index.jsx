@@ -10,39 +10,43 @@ const Box = posed.div({
   hidden: { opacity: 0 }
 });
 
-const Results = ({ currentResultsArray }) => {
+const Results = ({ currentStockSymbolArray }) => {
   return (
     <Box
       className="box"
-      pose={currentResultsArray.length > 0 ? "visible" : "hidden"}
+      pose={currentStockSymbolArray.length > 0 ? "visible" : "hidden"}
     >
-      <em>List of messages</em>
-      {currentResultsArray.map(messages => {
-        return (
-          <li key={messages.id} className="card">
-            <h3>{messages.body}</h3>
-            <p>
-              Username: {messages.user.username}
-              Name: {messages.user.name}
-              <br/>
-             <img src={messages.user.avatar_url} alt='user_image'/>
-            </p>
-          </li>
-        );
-      })}
+      <div>
+        <em>List of messages</em>
+        {currentStockSymbolArray.map(messages => {
+          return (
+            <ul>
+              <li key={messages.id} className="card">
+                <h3>{messages.body}</h3>
+                <p>
+                  Username: {messages.user.username}
+                  Name: {messages.user.name}
+                  <br />
+                  <img src={messages.user.avatar_url} alt="user_image" />
+                </p>
+              </li>
+            </ul>
+          );
+        })}
+      </div>
     </Box>
   );
 };
 
 Results.propTypes = {
-  currentResultsArray: PropTypes.arrayOf(Object),
+  currentStockSymbolArray: PropTypes.arrayOf(Object),
   name: PropTypes.string,
   dispatch: PropTypes.func
 };
 
 const mapStateToProps = state => {
   return {
-    currentResultsArray: state.currentResultsArray
+    currentStockSymbolArray: state.currentStockSymbolArray
   };
 };
 
