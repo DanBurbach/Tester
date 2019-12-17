@@ -1,23 +1,23 @@
 import * as types from './../constants/ActionTypes';
 
-// export const changeCharacter = (newSelectedCharacter) => ({
-//   type: types.CHANGE_CHARACTER,
-//   newSelectedCharacter
-// });
+export const changeStockSymbol = (newSelectedStockSymbol) => ({
+  type: types.CHANGE_STOCKSYMBOL,
+  newSelectedStockSymbol
+});
 
 export const requestStockSymbol = () => ({
   type: types.REQUEST_STOCKSYMBOLS,
 });
 
-export const receiveStockSymbol = (currentCharacterArray) => ({
+export const receiveStockSymbol = (currentStockSymbolArray) => ({
   type: types.RECEIVE_STOCKSYMBOLS,
-  currentCharacterArray
+  currentStockSymbolArray
 });
 
-export const selectStockSymbol = (character) =>
+export const selectStockSymbol = (stockSymbol) =>
   ({
     type: types.SELECT_STOCKSYMBOL,
-    selectedCharacter: character
+    selectStockSymbol: stockSymbol
   });
 
 export function fetchStockSymbol(name) {
