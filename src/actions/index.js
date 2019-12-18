@@ -24,11 +24,11 @@ export function fetchStockSymbol(name) {
   return function (dispatch) {
     dispatch(requestStockSymbol());
     const enteredValue = name.replace(' ', '+');
-    return fetch('https://api.stocktwits.com/api/2/streams/symbol/' + enteredValue + '.json').then(
-      response => response.json(),
-      error => console.log('An error occurred.', error)
-    ).then(function(json) {
-      dispatch(receiveStockSymbol(json.results));
+    return fetch('https://api.stocktwits.com/api/2/streams/symbol/' + enteredValue + '.json')
+      .then (response => response.json(),
+        error => console.log('An error occurred.', error))
+      .then (function(json) {
+        dispatch(receiveStockSymbol(json.results));
     });
   };
 }

@@ -3,6 +3,10 @@ import { fetchStockSymbol } from "./../../actions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
+function clearSearch(){
+      this.setState({ value: "", cursor: 0 });
+};
+
 function SymbolSearch ({ dispatch }) {
   let input;
   return (
@@ -19,6 +23,7 @@ function SymbolSearch ({ dispatch }) {
       >
         <input
           placeholder="Stock Symbol"
+          required
           ref={node => {
             input = node;
           }}

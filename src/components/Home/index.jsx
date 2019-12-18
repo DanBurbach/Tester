@@ -1,6 +1,7 @@
 import React, { Component } from "react";
+import uuid from "uuid";
 
-// import SymbolSearch from './../Search';
+import SymbolSearch from './../Search';
 // import Results from '../Results';
 
 class Home extends Component {
@@ -8,7 +9,7 @@ class Home extends Component {
     super(props);
     this.state = {
       stock: "",
-      symbolList: [],
+      symbolList: '',
       hasErrors: false,
       isLoaded: false
     };
@@ -23,69 +24,98 @@ class Home extends Component {
     };
 
     handleSubmit = async(event) => {
-        event.preventDefault();
         var enteredValue = this.state.stock;
         fetch('https://api.stocktwits.com/api/2/streams/symbol/' + enteredValue + '.json')
-            .then(results => results.json())
-            .then(results => this.setState({ symbolList: results }))
-            .catch(() => this.setState({ hasErrors: true }));
-
-        };
+        // .then(res => {
+            
+        //     var data = res.data;
+        //     var types = [];
+        //     for (let i = 0; i < data.types.length; i++) types.push(data.types[i].body);
+            
+        //     const stockMessages = {
+        //         id: data.id,
+        //         body: data.body,
+        //         name: data.name,
+        //         username: data.username,
+        //         avatar: data.avatar_url,
+        //     };
+            
+        //     this.setState({
+        //         symbolList: stockMessages
+        //     });
+        // })
+        .then(res => res.json())
+        .then(result => this.setState({ symbolList: result }))
+        .catch(() => this.setState({ hasErrors: true }));
+        event.preventDefault();
+    };
         
     handleDisplaySymbolMessages = () => {
-        console.log(this.state.stock)
-        console.log(this.state.symbolList.messages);
-        let list = this.state.symbolList.toString();
-        let messageArray = list ? list.split(',') : [];
+        console.log(this.state.symbolList);
+        // let list = JSON.parse(this.state.symbolList)
+        // console.log(this.state.symbolList.messages);
+
+        const key = uuid.v4();
+        const list = JSON.stringify(this.state.symbolList.messages);
+
+        // const list = this.state.symbolList.toString();
+        const messageArray = list ? list.split(',') : [];
+
+        // const listing = this.state.symbolList
+        //   .filter(symbol => symbol.messages.includes(this.state.symbolList))
+        //   .map(searchedSymbol => {
+        //     return (
+        //       <tr key={searchedSymbol.name}>
+        //         <td>{searchedSymbol.name}</td>
+        //       </tr>
+        //     );
+        //   });
+        
+        let listMessages = messageArray.map((messages) => (
+          <li key={key}>{messages}</li>
+        ));
 
         return (
-          <ul>
-            {messageArray.map((index, symbolList) => (
-              <li key={index}>
-                {symbolList.messages}
-              </li>
-            ))}
-          </ul>
+          <div>
+              {listMessages}
+          </div>
         );
     }
 
-  clearSearch = () => {
-      this.setState({ value: "", cursor: 0})
-  };
+    clearSearch = () => {
+        this.setState({ value: "", cursor: 0})
+    };
 
   render() {
       let { stock } = this.state;
         return (
-        <div>
+          <div>
             <div> Home </div>
-            {/* <SymbolSearch/> */}
+            <SymbolSearch />
+            <button value="Clear" onClick={this.clearSearch}>
+              Clear Search List
+            </button>
             <form>
-            <label>
+              <label>
                 $
                 <input
-                type="text"
-                placeholder="Stock Symbol"
-                onChange={this.handleChange}
-                name="search"
-                required
+                  type="text"
+                  placeholder="Stock Symbol"
+                  onChange={this.handleChange}
+                  name="search"
+                  required
                 />
-            </label>
-            <input type="submit" value="Submit" onClick={this.handleSubmit} />
-            <button value="Clear" onClick={this.clearSearch}>
-                Clear Search List
-            </button>
+              </label>
+              <input type="submit" value="Submit" onClick={this.handleSubmit} />
             </form>
             <br />
             <div> {stock} </div>
-            <br/>
+            <br />
 
             {/* return results here =========== */}
 
-            <div>
-                {this.handleDisplaySymbolMessages()}
-            </div>
-
-        </div>
+            <div>{this.handleDisplaySymbolMessages()}</div>
+          </div>
         );
     }
   
