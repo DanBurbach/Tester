@@ -10,9 +10,9 @@ Frontend Code Challege
 Using React and any available libraries, create a simple application using 
 the StockTwits API.
 
-Currently not working. Having issues with CORS and rendering/utilizing 
+*** Currently not working. Having issues with CORS and rendering/utilizing 
 the API data. Cannot find method in time period to be able to organize 
-and update data in real-time.
+and update data in real-time. ***
 ```
 ## __Setup/Installation Requirements__
 
