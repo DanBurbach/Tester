@@ -20,10 +20,14 @@ export const selectStockSymbol = (stockSymbol) =>
     selectStockSymbol: stockSymbol
   });
 
-export function fetchStockSymbol(name) {
+export function fetchStockSymbol(symbol) {
   return function (dispatch) {
+
     dispatch(requestStockSymbol());
-    const enteredValue = name.replace(' ', '+');
+
+    const enteredValue = symbol.replace(' ', '+').toUpperCase();
+    console.log("actions enteredValue: " + enteredValue);
+
     return fetch('https://api.stocktwits.com/api/2/streams/symbol/' + enteredValue + '.json')
       .then (response => response.json(),
         error => console.log('An error occurred.', error))
