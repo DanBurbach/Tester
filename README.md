@@ -32,7 +32,7 @@ and update data in real-time. ***
 
 ## __Requirements__
 
-  - [ ] Allow the user to input a US stock symbol or several symbols (eg: AAPL, BABA, BAC,
+  - [x] Allow the user to input a US stock symbol or several symbols (eg: AAPL, BABA, BAC,
 etc…)
   - [ ] Pull tweets from StockTwits that mention this symbol (stock symbols usually have a $
 before them, like: $AAPL, $BABA, etc…)
