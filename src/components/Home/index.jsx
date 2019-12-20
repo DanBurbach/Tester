@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import uuid from "uuid";
 
-import SymbolSearch from './../Search';
+// import SymbolSearch from './../Search';
 // import Results from '../Results';
 
 class Home extends Component {
@@ -9,7 +9,8 @@ class Home extends Component {
     super(props);
     this.state = {
       stock: "",
-      symbolList: '',
+      symbolList: {},
+      resultSymbol: {},
       hasErrors: false,
       isLoaded: false
     };
@@ -24,62 +25,38 @@ class Home extends Component {
     };
 
     handleSubmit = async(event) => {
-        var enteredValue = this.state.stock;
-        fetch('https://api.stocktwits.com/api/2/streams/symbol/' + enteredValue + '.json')
-        // .then(res => {
-            
-        //     var data = res.data;
-        //     var types = [];
-        //     for (let i = 0; i < data.types.length; i++) types.push(data.types[i].body);
-            
-        //     const stockMessages = {
-        //         id: data.id,
-        //         body: data.body,
-        //         name: data.name,
-        //         username: data.username,
-        //         avatar: data.avatar_url,
-        //     };
-            
-        //     this.setState({
-        //         symbolList: stockMessages
-        //     });
-        // })
-        .then(res => res.json())
+      event.preventDefault();
+      const apiUrl = "https://api.stocktwits.com/api/2/streams/symbol";
+      const enteredData = this.state.stock;
+      const stocktwitsQuery = `${apiUrl}/${enteredData}.json`;
+        fetch(stocktwitsQuery)
+        .then(response => response.json())
         .then(result => this.setState({ symbolList: result }))
         .catch(() => this.setState({ hasErrors: true }));
-        event.preventDefault();
+        this.handleDisplaySymbolMessages();
     };
         
-    handleDisplaySymbolMessages = () => {
-        console.log(this.state.symbolList);
-        // let list = JSON.parse(this.state.symbolList)
-        // console.log(this.state.symbolList.messages);
+    handleDisplaySymbolMessages = (body) => {
+        console.log(this.state.symbolList.messages);
 
         const key = uuid.v4();
         const list = JSON.stringify(this.state.symbolList.messages);
 
         // const list = this.state.symbolList.toString();
+        // let list = JSON.parse(this.state.symbolList.messages);
         const messageArray = list ? list.split(',') : [];
 
-        // const listing = this.state.symbolList
-        //   .filter(symbol => symbol.messages.includes(this.state.symbolList))
-        //   .map(searchedSymbol => {
-        //     return (
-        //       <tr key={searchedSymbol.name}>
-        //         <td>{searchedSymbol.name}</td>
-        //       </tr>
-        //     );
-        //   });
-        
         let listMessages = messageArray.map((messages) => (
-          <li key={key}>{messages}</li>
+          <ol key={key}>{messages}</ol>
         ));
 
-        return (
-          <div>
-              {listMessages}
-          </div>
-        );
+        // return (
+        //   <div>
+        //       <ul>
+        //         {listMessages}
+        //       </ul>
+        //   </div>
+        // );
     }
 
     clearSearch = () => {
@@ -91,7 +68,7 @@ class Home extends Component {
         return (
           <div>
             <div> Home </div>
-            <SymbolSearch />
+            {/* <SymbolSearch /> */}
             <button value="Clear" onClick={this.clearSearch}>
               Clear Search List
             </button>
@@ -122,3 +99,4 @@ class Home extends Component {
 }
 
 export default Home;
+
