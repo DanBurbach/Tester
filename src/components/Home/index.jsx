@@ -50,13 +50,13 @@ class Home extends Component {
           <ol key={key}>{messages}</ol>
         ));
 
-        // return (
-        //   <div>
-        //       <ul>
-        //         {listMessages}
-        //       </ul>
-        //   </div>
-        // );
+        return (
+          <div>
+              <ul>
+                {listMessages}
+              </ul>
+          </div>
+        );
     }
 
     clearSearch = () => {
