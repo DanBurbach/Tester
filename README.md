@@ -1,15 +1,15 @@
 # Tester Project
 
 ### __Created by Dan Burbach__
-#### __December  2019__
+### __December  2019__
 
-Frontend Challege
+Frontend Code Challege
 
 ## __Description__
 ```
 Using React and any available libraries, create a simple application using the StockTwits API.
 
-Currently not working. Having issues with CORS and rendering/utilizing the API data.
+Currently not working. Having issues with CORS and rendering/utilizing the API data. Cannot find method in time period to be able to organize and update data in real-time.
 ```
 ## __Setup/Installation Requirements__
 
@@ -21,11 +21,11 @@ Currently not working. Having issues with CORS and rendering/utilizing the API d
 
   * npm run start
 
-  * Open a browser: http://localhost:8080/
+  * Open a browser: http://localhost:3000/
 
-### __Technologies Used__
+## __Technologies Used__
 
-  Javascript 16.8, React.js, Redux, Firebase, CSS, HTML, JSON, Babel, esLint, and webpack
+  React.js, Redux, HTML, JSON, Babel, jquery, and uuid (axios is installed, but currently not used)
 
 ## __Requirements__
 
@@ -43,7 +43,7 @@ the page.
   - [ ] Pay attention to details and make the UI and UX the best you
 possibly can, considering time constraints.
 
-### __Version__
+## __Version__
 
 Alpha v1.0
 
